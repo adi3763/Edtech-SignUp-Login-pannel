@@ -1,0 +1,290 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+.login-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+  animation: slideUp 0.6s ease-out;
+  position: relative;
+  z-index: 10;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Label and Input Container */
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+/* Label Text Styling */
+.login-form .email,
+.login-form .password {
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.login-form .required {
+  color: #ef4444;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Input Field Styling */
+.login-form input {
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  font-family: "Inter", sans-serif;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.login-form input::placeholder {
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* Input Focus States */
+.login-form input:focus {
+  border-color: #6366f1;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1), 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 20px rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+}
+
+.login-form input:hover:not(:focus) {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-1px);
+}
+
+/* Password Field with Show/Hide Button - FIXED */
+.login-form label:has(input[name="password"]) {
+  position: relative;
+}
+
+.login-form label:has(input[name="password"]) input {
+  padding-right: 5.5rem;
+}
+
+/* Show/Hide Buttons - FIXED */
+.login-form .showBtn,
+.login-form .hideBtn {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #6366f1;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 3;
+  font-family: "Inter", sans-serif;
+  min-width: 55px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form .showBtn:hover,
+.login-form .hideBtn:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+.login-form .showBtn:active,
+.login-form .hideBtn:active {
+  transform: scale(0.95);
+}
+
+/* Login Button */
+.login-form form > button:not(.showBtn):not(.hideBtn) {
+  padding: 1.25rem 2rem;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+  font-family: "Inter", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 100%;
+}
+
+.login-form form > button:not(.showBtn):not(.hideBtn)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.login-form form > button:not(.showBtn):not(.hideBtn):hover::before {
+  left: 100%;
+}
+
+.login-form form > button:not(.showBtn):not(.hideBtn):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4), 0 8px 20px rgba(139, 92, 246, 0.3), 0 0 30px rgba(217, 70, 239, 0.2);
+}
+
+.login-form form > button:not(.showBtn):not(.hideBtn):active {
+  transform: translateY(-1px);
+}
+
+/* Form Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus Line Animation */
+.login-form label {
+  position: relative;
+}
+
+.login-form label::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #d946ef);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+
+.login-form label:focus-within::after {
+  width: 100%;
+}
+
+/* Input Validation States */
+.login-form input:valid:not(:placeholder-shown) {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.login-form input:valid:not(:placeholder-shown):focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.login-form input:invalid:not(:placeholder-shown):not(:focus) {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+/* Enhanced Visual Effects */
+.login-form label:focus-within {
+  transform: scale(1.01);
+}
+
+.login-form label:focus-within .email,
+.login-form label:focus-within .password {
+  color: #6366f1;
+  transform: translateX(2px);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .login-form {
+    padding: 0 1rem;
+  }
+
+  .login-form input {
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .login-form label:has(input[name="password"]) input {
+    padding-right: 4.5rem;
+  }
+
+  .login-form .showBtn,
+  .login-form .hideBtn {
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    min-width: 50px;
+  }
+
+  .login-form form > button:not(.showBtn):not(.hideBtn) {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .login-form .email,
+  .login-form .password {
+    font-size: 0.85rem;
+  }
+}
+
+/* Remove any conflicting button styles */
+.login-form button {
+  all: unset;
+}
+
+.login-form .showBtn,
+.login-form .hideBtn {
+  all: unset;
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #6366f1;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 3;
+  font-family: "Inter", sans-serif;
+  min-width: 55px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

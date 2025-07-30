@@ -1,0 +1,341 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+.signup-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+  position: relative;
+  z-index: 10;
+}
+
+.signup-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Role Toggle Buttons - FIXED */
+.chooseBtns {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  gap: 1em;
+}
+
+.chooseBtns::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: calc(48% );
+  height: calc(100% - 12px);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 12px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  
+}
+
+/* Move the slider when instructor is active */
+.chooseBtns:has(button:nth-child(2).active)::before {
+  transform: translateX(103%);
+}
+
+.chooseBtns button {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  border-radius: 12px;
+  font-family: "Inter", sans-serif;
+}
+
+.chooseBtns button.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.chooseBtns button:hover:not(.active) {
+  color: #d1d5db;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Form Container */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Label and Input Styling */
+.signup-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.signup-form input {
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: "Inter", sans-serif;
+  backdrop-filter: blur(10px);
+}
+
+.signup-form input::placeholder {
+  color: #6b7280;
+}
+
+.signup-form input:focus {
+  border-color: #6366f1;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1), 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.signup-form input:hover:not(:focus) {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Password Fields - FIXED with proper spacing */
+.signup-form label:has(input[name="password"]) input,
+.signup-form label:has(input[name="confirmPassword"]) input {
+  padding-right: 5.5rem;
+}
+
+/* Show/Hide Buttons - FIXED positioning */
+.signup-form .showBtn,
+.signup-form .hide-btn,
+.signup-form button:not([type="submit"]):not(.chooseBtns button) {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #6366f1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 3;
+  font-family: "Inter", sans-serif;
+  min-width: 50px;
+  text-align: center;
+}
+
+.signup-form .showBtn:hover,
+.signup-form .hide-btn:hover,
+.signup-form button:not([type="submit"]):not(.chooseBtns button):hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: scale(1);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+.signup-form .showBtn:active,
+.signup-form .hide-btn:active,
+.signup-form button:not([type="submit"]):not(.chooseBtns button):active {
+  transform: scale(0.95);
+}
+
+/* Submit Button */
+.signup-container form > button[type="submit"],
+.signup-container form > button:last-child:not(.showBtn):not(.hide-btn) {
+  padding: 1.25rem 2rem;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+  font-family: "Inter", sans-serif;
+  width: 100%;
+}
+
+.signup-container form > button[type="submit"]::before,
+.signup-container form > button:last-child:not(.showBtn):not(.hide-btn)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.signup-container form > button[type="submit"]:hover::before,
+.signup-container form > button:last-child:not(.showBtn):not(.hide-btn):hover::before {
+  left: 100%;
+}
+
+.signup-container form > button[type="submit"]:hover,
+.signup-container form > button:last-child:not(.showBtn):not(.hide-btn):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4), 0 5px 15px rgba(139, 92, 246, 0.3);
+}
+
+.signup-container form > button[type="submit"]:active,
+.signup-container form > button:last-child:not(.showBtn):not(.hide-btn):active {
+  transform: translateY(0);
+}
+
+/* Form Animations */
+.signup-container {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Input Focus Animation */
+.signup-form label::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+.signup-form label:focus-within::after {
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .signup-container {
+    padding: 0 1rem;
+  }
+
+  .chooseBtns button {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .signup-form input {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .signup-form label:has(input[name="password"]) input,
+  .signup-form label:has(input[name="confirmPassword"]) input {
+    padding-right: 4.5rem;
+  }
+
+  .signup-form .showBtn,
+  .signup-form .hide-btn,
+  .signup-form button:not([type="submit"]):not(.chooseBtns button) {
+    right: 0;
+    bottom: 0;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+    min-width: 45px;
+  }
+
+  .signup-container form > button[type="submit"],
+  .signup-container form > button:last-child:not(.showBtn):not(.hide-btn) {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Enhanced Visual Effects */
+.signup-form label:focus-within {
+  transform: scale(1.01);
+}
+
+.signup-form input:valid:not(:placeholder-shown) {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.signup-form input:invalid:not(:placeholder-shown):not(:focus) {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+/* Loading State for Submit Button */
+.signup-container form > button[type="submit"]:disabled,
+.signup-container form > button:last-child:not(.showBtn):not(.hide-btn):disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.signup-container form > button[type="submit"]:disabled:hover,
+.signup-container form > button:last-child:not(.showBtn):not(.hide-btn):disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Remove default button styling conflicts */
+.signup-form button {
+  all: unset;
+}
+
+.signup-form .showBtn,
+.signup-form .hide-btn {
+  all: unset;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #6366f1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 3;
+  font-family: "Inter", sans-serif;
+  min-width: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
