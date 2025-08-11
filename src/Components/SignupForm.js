@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import './signup.css';
+import axios from "axios";
 
 
 function SignupForm(){
@@ -9,6 +10,12 @@ function SignupForm(){
     let navigate = useNavigate();
     const [showPasswords,setShowPasswords] = useState(false);
     const [showConfirmPassword,setShowConfirmPassword] = useState(false);
+
+    const api = axios.create({
+        baseURL : "http://localhost:8000/api",
+          headers: { Accept: "application/json" },
+
+    })
 
     const [formData, setForm] = useState({
         firstName:"",
@@ -28,7 +35,7 @@ function SignupForm(){
         ));
     }
 
-    function submitHandler(e){
+   async function submitHandler(e){
         e.preventDefault();
         console.log(formData);
  if(formData.password !== formData.confirmPassword) {
@@ -36,15 +43,45 @@ function SignupForm(){
             return ;
         }
 
-        // setIsLoggedIn(true);
-        toast.success("Account Created");
-        const accountData = {
-            ...formData
-        };
-        console.log("printing account data ");
-        console.log(accountData);
+        try{
+            const res = await api.post("/register",{
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        password_confirmation: formData.confirmPassword, // important!
+        role: formData.role,
+            });
 
-        navigate("/login");  
+            const { token, user } = res.data || {};
+    //   if (!token) {
+    //     throw new Error("No token returned from API.");
+    //   }
+
+      // Save token for subsequent requests
+      localStorage.setItem("token", token);
+
+      toast.success(`Welcome, ${user?.first_name || formData.firstName}!`);
+              navigate("/login");
+        }
+        catch(err){
+            let apiMsg = null;
+            if (err?.response?.data?.message) {
+                apiMsg = err.response.data.message;
+            } else if (err?.response?.data?.errors) {
+                apiMsg = Object.values(err.response.data.errors)
+                    .flat()
+                    .join("\n");
+            }
+
+            toast.error(apiMsg || "Signup failed. Please try again.");
+            console.error("Signup error:", err);
+        }
+        
+        
+        
+
+        
       }
 
       function handleRoleChange(selectedRole) {
